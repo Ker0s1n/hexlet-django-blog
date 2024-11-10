@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from hexlet_django_blog import views
+from hexlet_django_blog import views, article
 
 urlpatterns = [
     path('', views.redir),

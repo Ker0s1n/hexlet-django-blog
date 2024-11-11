@@ -3,5 +3,7 @@
 {% block title %}Инфо о статье{% endblock %}
 
 {% block content %}
-    <h1>Статья номер {{ article }}. Тег {{ tags }}</h1>
+    <h1>Статья номер {{ article.id }}</h1>
+    <h2>{{ article.name }} опубликовано: {{ article.created_at }}</h2>
+    <h4>{{ article.body }}</h4>
 {% endblock %}

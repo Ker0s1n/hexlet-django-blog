@@ -1,22 +1,29 @@
 # from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views import View
+
+from hexlet_django_blog.article.models import Article
 
 
 class ArticleView(View):
     def get(self, request, *args, **kwargs):
+        articles = Article.objects.all()[:15]
         return render(
             request,
             "articles/index.html",
             context={
-                "title": "Articles",
-                "description": ["Here", "we", "have", "articles", "of blog"],
-            },
+                "articles": articles,
+            }
         )
 
 
 class ArticleInfo(View):
-    def get(self, request, article_id, tags, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
+        article = get_object_or_404(Article.objects, id=kwargs['article_id'])
         return render(
-            request, "articles/info.html", context={"article": article_id, "tags": tags}
+            request,
+            "articles/info.html",
+            context={
+                "article": article,
+            }
         )

@@ -1,12 +1,4 @@
 from django.views.generic.base import TemplateView
-from django.shortcuts import redirect
-from django.urls import reverse
-
-
-def redir(request):
-    return redirect(
-        reverse("article_info", kwargs={"article_id": 42, "tags": "python"})
-    )
 
 
 class IndexView(TemplateView):

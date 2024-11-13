@@ -1,7 +1,7 @@
-<form action="{% url 'article_comment' %}" method="post">
+<form action="{% url 'article_comment' article_id %}" method="post">
     {% csrf_token %}
     <table border="1">
-       {{ form }}
+    {{ form }}
     </table>
     <input type="submit" value="Сохранить">
 </form>

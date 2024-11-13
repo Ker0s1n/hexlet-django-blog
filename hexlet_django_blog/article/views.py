@@ -36,7 +36,7 @@ class ArticleFormCreateView(View):
     def get(self, request, *args, **kwargs):
         form = ArticleForm()
         return render(request, 'articles/create.html', {'form': form})
-    
+
     def post(self, request, *args, **kwargs):
         form = ArticleForm(request.POST)
         if form.is_valid():

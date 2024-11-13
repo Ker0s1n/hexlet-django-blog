@@ -6,4 +6,7 @@
     <h1>Статья номер {{ article.id }}</h1>
     <h2>{{ article.name }} опубликовано: {{ article.created_at }}</h2>
     <h4>{{ article.body }}</h4>
+    <h4>
+        <a href="{% url 'article_comment' article.id %}">Написать комментарий</a>
+    </h4>
 {% endblock %}

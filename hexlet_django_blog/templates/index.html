@@ -3,5 +3,26 @@
 {% block title %}Эксперименты с Django на Хекслете{% endblock %}
 
 {% block content %}
-<h1>Hello, {{ who }}!</h1>
+{% load static %}
+<div id="carouselExampleFade" class="carousel slide carousel-fade d-md-inline-flex mx-5">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'img/hej.jpg' %}" class="d-block" alt="hej">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/hog.jpg' %}" class="d-block" alt="hog">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/hejhog.jpg' %}" class="d-block" alt="hejhog">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Статья{% endblock %}
+
+{% block header %}Бланк форм{% endblock %}
+
+{% if form.errors %}
+<div>
+  <ul>
+    {% for error in form.errors %}
+    <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="btn btn-primary" type="submit" value="{% block button_value %}{% endblock %}">
+</form>
+{% endblock %}

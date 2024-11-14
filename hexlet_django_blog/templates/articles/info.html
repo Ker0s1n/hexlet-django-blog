@@ -1,34 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Инфо о статье{% endblock %}
+{% block title %}Просмотр статьи{% endblock %}
+
+{% block header %}{{ article.name }}{% endblock %}
 
 {% block content %}
-<table class="table-bordered text-center">
-    <thead>
-        <tr>
-            <th class="px-2" scope="col">Номер</th>
-            <th class="px-2" scope="col">Название</th>
-            <th class="px-2" scope="col">Содержание</th>
-            <th class="px-2" scope="col">Дата публикации</th>
-            <th class="px-2" scope="col">Дата изменения</th>
-            <th class="px-2" colspan="2">Действия</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <tr>
-            <th class="px-2" scope="row">{{ article.id }}</th>
-            <td class="px-2">{{ article.name }}</td>
-            <td class="px-2">{{ article.body }}</td>
-            <td class="px-2">{{ article.created_at }}</td>
-            <td class="px-2">{{ article.updated_at }}</td>
-            <td class="px-2"><a href="{% url 'article_update' article.id %}">Изменить</a></td>
-            <td>
-                <form action="{% url 'article_delete' article.id %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Удалить">
-                </form>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="card">
+  <div class="card-header bg-secondary text-white">
+    <h2> Статья от {{ article.updated_at|date:"d.m.Y H:i" }}</h2>
+    <br>
+    <h4 class="text-end">Изменения от {{ article.created_at|date:"d.m.Y H:i" }}</h4>
+  </div>
+  <div class="card-body bg-light">
+    <p>{{ article.body }}</p>
+  </div>
+</div>
 {% endblock %}

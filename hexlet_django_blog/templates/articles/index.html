@@ -1,23 +1,32 @@
 {% extends "base.html" %}
 
+{% block title %}Статьи о ежах{% endblock %}
+
+{% block header %}Список статей{% endblock %}
+
 {% block content %}
-<table class="table-bordered table-striped">
+<a class="link-primary link-underline-opacity-0" href="{% url 'article_create' %}">Создать статью</a>
+<table class="table table-striped">
     <thead>
-        <tr><a href="{% url 'article_create' %}">Создать статью</a></tr>
         <tr>
             <th scope="col">Номер</th>
             <th scope="col">Название</th>
-            <th scope="col">Содержание</th>
-            <th colspan="2">Действия</th>
+            <th scope="col">Дата редактирования</th>
+            <th class="text-center" colspan="2">Действия</th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
         {% for article in articles %}
         <tr>
             <th class="px-2" scope="row">{{ article.id }}</th>
-            <td class="px-2"><a href="{% url 'article_info' article.id %}">{{ article.name }}</a></td>
-            <td class="px-2">{{ article.body }}</td>
-            <td class="px-2"><h7><a href="{% url 'article_update' article.id %}">Изменить</a></h7></td>
+            <td class="px-2"><a
+                    class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    href="{% url 'article_info' article.id %}">{{ article.name }}</a></td>
+            <td class="px-2">{{ article.updated_at|date:"d.m.Y H:i" }}</td>
+            <td class="px-2">
+                <h7><a class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                        href="{% url 'article_update' article.id %}">Изменить</a></h7>
+            </td>
             <td>
                 <form action="{% url 'article_delete' article.id %}" method="post">
                     {% csrf_token %}

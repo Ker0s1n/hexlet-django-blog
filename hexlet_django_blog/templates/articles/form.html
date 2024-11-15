@@ -15,9 +15,11 @@
 {% endif %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input class="btn btn-primary" type="submit" value="{% block button_value %}{% endblock %}">
+<form method="post"
+  action="{% block action_value %}{% endblock action_value %}">
+  {% csrf_token %}
+  {% block form %}
+  {% endblock form %}
+  <input class="btn btn-secondary" type="submit" value="{% block button_value %}{% endblock button_value %}">
 </form>
-{% endblock %}
+{% endblock content %}

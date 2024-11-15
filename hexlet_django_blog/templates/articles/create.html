@@ -1,7 +1,11 @@
 {% extends "articles/form.html" %}
 
-{% block header %}Создать статью{% endblock %}
+{% block header %}Создать статью{% endblock header %}
 
-{% block button_value %}Создать{% endblock %}
+{% url 'article_update' article_id as the_url %}
 
-
+{% block action_value %}{{ the_url }}{% endblock action_value %}
+{% block form %}
+{{ form }}
+{% endblock form %}
+{% block button_value %}Создать{% endblock button_value %}

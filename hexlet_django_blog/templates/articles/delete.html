@@ -1,0 +1,12 @@
+{% extends "articles/form.html" %}
+
+{% block header %}Удалить статью{% endblock header %}
+
+{% url 'article_delete' article_id as the_url %}
+
+{% block action_value %}{{ the_url }}{% endblock action_value %}
+{% block form %}
+<p>Вы уверены что хотите удалить <strong>{{ article }}</strong>?</p>
+{% endblock form %}
+{% block button %}danger{% endblock button %}
+{% block button_value %}Да, удалить{% endblock button_value %}

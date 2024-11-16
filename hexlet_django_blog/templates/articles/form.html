@@ -20,6 +20,6 @@
   {% csrf_token %}
   {% block form %}
   {% endblock form %}
-  <input class="btn btn-secondary" type="submit" value="{% block button_value %}{% endblock button_value %}">
+  <input class="btn btn-{% block button %}{% endblock button %}" type="submit" value="{% block button_value %}{% endblock button_value %}">
 </form>
 {% endblock content %}

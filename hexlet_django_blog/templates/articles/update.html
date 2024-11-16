@@ -1,11 +1,21 @@
 {% extends "articles/form.html" %}
 
-{% block content %}
-<form action="{% url 'article_update' article_id %}">
-    {% csrf_token %}
-    <table border="1">
-        {{ form }}
-    </table>
-    <input type="submit" value="Сохранить">
-</form>
-{% endblock %}
+{% block header %}Обновить статью{% endblock header %}
+
+{% url 'article_update' article_id as the_url %}
+
+{% block action_value %}{{ the_url }}{% endblock action_value %}
+{% block form %}
+<div class="form-floating mb-3">
+    <input name="name" type="text" class="form-control" id="floatingInput" placeholder="Название статьи" required
+        value="{{ form.name.value }}">
+    <label for="floatingInput">Название статьи</label>
+</div>
+<div class="form-floating mb-3">
+    <textarea name="body" type="text" class="form-control" id="floatingInput" placeholder="Содержание статьи"
+        style="height: 350px;" required>{{ form.body.value }}</textarea>
+    <label for="floatingInput">Содержание статьи</label>
+</div>
+{% endblock form %}
+{% block button %}secondary{% endblock button %}
+{% block button_value %}Сохранить{% endblock button_value %}

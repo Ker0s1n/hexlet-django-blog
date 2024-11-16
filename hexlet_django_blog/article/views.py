@@ -92,6 +92,12 @@ class ArticleFormEditView(View):
 
 
 class ArticleFormDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        article_id = kwargs["article_id"]
+        article = Article.objects.get(id=article_id)
+        return render(
+            request, "articles/delete.html", {"article": article}
+        )       
 
     def post(self, request, *args, **kwargs):
         article_id = kwargs.get('article_id')

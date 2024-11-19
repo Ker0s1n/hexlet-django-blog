@@ -94,7 +94,7 @@ class ArticleComment(View):
         article = get_object_or_404(Article, id=article_id)
         form = ArticleCommentForm(request.POST)
         if form.is_valid():
-            # body = request.POST.get('comment')
+            # body = request.POST.get('body')
             # comment = Comment(article, body)
             comment = form.save(commit=False)
             comment.article = article

@@ -1,17 +1,16 @@
-# from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django.views.decorators.http import require_POST
 
-from hexlet_django_blog.article.models import Article
+from hexlet_django_blog.article.models import Article, Comment
 
 from .forms import ArticleCommentForm, ArticleForm
 
 
 class ArticleView(View):
     def get(self, request, *args, **kwargs):
-        articles = Article.objects.all()[:]
+        articles = Article.objects.all()[:5]
         return render(
             request,
             "articles/index.html",
@@ -32,7 +31,7 @@ class ArticleInfo(View):
             context={
                 "article": article,
                 "comments": comments,
-                'form': form,
+                "form": form,
             },
         )
 
@@ -89,18 +88,22 @@ class ArticleFormDeleteView(View):
         return redirect("articles_list")
 
 
-@require_POST
-def comment_article(request, article_id):
-    article = get_object_or_404(Article, id=article_id)
-    comment = None
-    form = ArticleCommentForm(request.POST)
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.article = article
-        comment.save()
-        messages.add_message(request, messages.SUCCESS, "Комментарий успешно добавлен")
-    return render(
-        request,
-        "articles/info.html",
-        {"article": article, "form": form, "comment": comment},
-    )
+class ArticleComment(View):
+    def post(self, request, *args, **kwargs):
+        article_id = kwargs.get("article_id")
+        article = get_object_or_404(Article, id=article_id)
+        form = ArticleCommentForm(request.POST)
+        if form.is_valid():
+            # body = request.POST.get('comment')
+            # comment = Comment(article, body)
+            comment = form.save(commit=False)
+            comment.article = article
+            comment.save()
+            messages.add_message(
+                request, messages.SUCCESS, "Комментарий успешно добавлен"
+            )
+        else:
+            messages.add_message(
+                request, messages.WARNING, "Ошибка при добавлении комментария"
+            )
+        return redirect("article_info", article_id)

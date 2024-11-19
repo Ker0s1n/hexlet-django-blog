@@ -21,7 +21,7 @@ urlpatterns = [
     ),
     path(
         "<int:article_id>/comment/",
-        views.comment_article,
+        views.ArticleComment.as_view(),
         name="comment_article",
     ),
     path(
